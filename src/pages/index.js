@@ -49,7 +49,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-8 text-center">Experience</h2>
             <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-2xl font-semibold">Full Stack Intern - WorldRef (1YR 1M)</h3>
-              <p className="text-gray-600 mb-4">New Delhi | August 2024 - August 2025</p>
+              <p className="text-gray-600 mb-4">New Delhi | July 2024 - August 2025</p>
               <ul className="list-disc ml-6 text-gray-700 space-y-2">
                 <li>Collaborated closely with the product manager, developers, and quality analysts to enhance product capabilities across offline and online platforms.</li>
                 <li>Developed production-ready RESTful APIs in Java and Spring Boot for both mobile and web applications.</li>
@@ -127,7 +127,8 @@ export default function Home() {
                   </li>
                   <li>
                     <a href="https://codeforces.com/profile/ManuVashisth">
-                      <img src="https://img.shields.io/codeforces/rating/ManuVashisth.svg?style=for-the-badge&logo=codeforces" alt="Codeforces rating" />
+                      <img src="https://img.shields.io/badge/Codeforces-blue?style=for-the-badge&logo=codeforces&labelColor=hex&color=black
+" />
                     </a>
                   </li>
                   <li>
@@ -145,8 +146,8 @@ export default function Home() {
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-8">Contact</h2>
             <p className="text-lg mb-4">Email: <a href="mailto:signorvashistha007@gmail.com" className="text-blue-500 hover:underline">signorvashistha007@gmail.com</a></p>
-            <p className="text-lg mb-4">Phone: +91 8448145752</p>
-            <p className="text-lg mb-4">LinkedIn: <a href="https://linkedin.com/in/manu-vashisth-1a4b1b23b" className="text-blue-500 hover:underline">linkedin.com/in/manu-vashisth-1a4b1b23b</a></p>
+            <p className="text-lg mb-4">Phone: +91 8448154757</p>
+            <p className="text-lg mb-4">LinkedIn: <a href="https://www.linkedin.com/in/manu-vashisth-9366b2219/" className="text-blue-500 hover:underline">linkedin.com/in/manu-vashisth-1a4b1b23b</a></p>
             <p className="text-lg mb-4">GitHub: <a href="https://github.com/RedHolger" className="text-blue-500 hover:underline">github.com/RedHolger</a></p>
           </div>
         </section>
