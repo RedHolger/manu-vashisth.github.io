@@ -119,28 +119,28 @@ export default function Home() {
             <div className="max-w-3xl mx-auto space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-2xl font-semibold mb-4">Coding Profiles</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-4">
                   <li>
-                    <strong>LeetCode:</strong> <a href="YOUR_LEETCODE_PROFILE_URL" className="text-blue-500 hover:underline">Profile</a> | Solved: 500+ problems
+                    <a href="https://leetcode.com/u/ManuVashisth/">
+                      <img src="https://img.shields.io/badge/-LeetCode-FFA116?style=for-the-badge&logo=LeetCode&logoColor=black" alt="LeetCode profile" />
+                    </a>
                   </li>
                   <li>
-                    <strong>CodeForces:</strong> <a href="YOUR_CODEFORCES_PROFILE_URL" className="text-blue-500 hover:underline">Profile</a> | Rating: 1500+
+                    <a href="https://codeforces.com/profile/ManuVashisth">
+                      <img src="https://img.shields.io/codeforces/rating/ManuVashisth.svg?style=for-the-badge&logo=codeforces" alt="Codeforces rating" />
+                    </a>
                   </li>
                   <li>
-                    <strong>CodeChef:</strong> <a href="YOUR_CODECHEF_PROFILE_URL" className="text-blue-500 hover:underline">Profile</a> | 5 Star
+                    <a href="https://www.codechef.com/users/manuvashisth">
+                      <img src="https://img.shields.io/badge/CodeChef-9057A9?style=for-the-badge&logo=codechef&logoColor=white" alt="CodeChef profile" />
+                    </a>
                   </li>
-                </ul>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-2xl font-semibold mb-4">Certifications</h3>
-                <ul className="space-y-2">
-                  <li>5-Star HackerRank (Problem Solving)</li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
-        
+
         <section id="contact" className="py-16 bg-white">
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-8">Contact</h2>
