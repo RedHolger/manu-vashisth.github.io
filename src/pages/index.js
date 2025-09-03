@@ -32,7 +32,7 @@ export default function Home() {
             <p className="text-lg max-w-2xl mx-auto mb-8">Innovative and technically proficient software developer with hands-on experience in building production-level RESTful APIs and solving complex problems.</p>
             <div className="flex justify-center space-x-4">
               <a href="#contact" className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Get in Touch</a>
-              <a href="/Manu_Vashisth_CV.pdf" download className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">Download CV</a>
+              <a href="/manu-vashisth.github.io/Manu_Vashisth_CV.pdf" download className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">Download CV</a>
             </div>
           </div>
         </section>
