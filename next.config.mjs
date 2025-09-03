@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  assetPrefix: '/manu-vashisth.github.io/',
+  // The GitHub Pages action will handle this for you
 };
 
 export default nextConfig;
