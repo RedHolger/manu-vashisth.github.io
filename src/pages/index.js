@@ -118,6 +118,34 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-8 text-center">Achievements & Coding Profiles</h2>
             <div className="max-w-3xl mx-auto space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-2xl font-semibold mb-4">Open Source Contributions</h3>
+                <div className="mb-6">
+                  <h4 className="text-xl font-semibold mb-2">Kestra - Hacktoberfest 2024</h4>
+                  <p className="text-gray-700 mb-3">
+                    <strong>PR #214:</strong> fix: Add configurable bad line handling to CsvToIon via OnBadLines enum
+                  </p>
+                  <p className="text-gray-600 mb-3">
+                    Enhanced the CsvToIon task in Kestra by implementing a configurable error handling mechanism through the OnBadLines enum. This feature allows users to specify how to handle malformed lines in CSV files during conversion to Ion format, improving data processing flexibility and robustness.
+                  </p>
+                  <ul className="list-disc ml-6 text-gray-700 space-y-2 mb-3">
+                    <li>Implemented OnBadLines enum with three options: ERROR (raise error), WARN (log warning and continue), and SKIP (silently skip bad lines)</li>
+                    <li>Enhanced data processing capabilities by providing flexible error management aligned with industry standards</li>
+                    <li>Improved the robustness of CSV to Ion conversion workflows in Kestra's data processing pipeline</li>
+                  </ul>
+                  <p className="text-sm text-gray-500 mb-2">
+                    <strong>Tech Stack:</strong> Java, Kestra Plugin Development
+                  </p>
+                  <a 
+                    href="https://github.com/kestra-io/kestra/pull/214" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline inline-flex items-center"
+                  >
+                    View Pull Request →
+                  </a>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-2xl font-semibold mb-4">Coding Profiles</h3>
                 <ul className="space-y-4">
                   <li>
