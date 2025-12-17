@@ -261,7 +261,7 @@ export default function Home() {
                     <strong className="text-blue-600">Tech Stack:</strong> Java, Kestra Plugin Development
                   </p>
                   <motion.a 
-                    href="https://github.com/kestra-io/kestra/pull/214" 
+                    href="https://github.com/kestra-io/plugin-serdes/pull/214" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
