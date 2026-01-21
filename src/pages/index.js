@@ -222,6 +222,37 @@ export default function Home() {
                 </motion.a>
               </div>
             </motion.div>
+            <motion.div 
+               whileHover={{ scale: 1.02, y: -5 }} 
+               className="max-w-4xl mx-auto bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200 mt-12" 
+             > 
+               <h3 className="text-2xl md:text-3xl font-semibold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"> 
+                 Lingua: Media-Driven Language Learning 
+               </h3> 
+               <p className="text-gray-600 mb-6 text-lg">Jan 2025 - Present</p> 
+               <p className="text-gray-700 mb-6 text-lg leading-relaxed"> 
+                 An AI-powered language learning platform that transforms media subtitles into personalized study materials. It uses a hybrid microservices architecture to process video content, generating simplified subtitles, vocabulary previews, grammar recaps, and interactive quizzes tailored to the user's CEFR level. 
+               </p> 
+               <ul className="list-disc ml-6 text-gray-700 space-y-3 mb-6 text-lg"> 
+                 <li><strong>AI-Driven Simplification:</strong> Uses Gemini LLM to rewrite subtitles to target CEFR levels (A1-C2) while preserving semantic meaning (verified via BERTScore).</li> 
+                 <li><strong>Contextual Learning:</strong> Generates "preview" subtitles to introduce difficult vocabulary before scenes and "recap" subtitles to explain grammar after scenes.</li> 
+                 <li><strong>Hybrid Architecture:</strong> Orchestrated by Java Spring Boot (backend/API) with a Python FastAPI microservice for AI processing and audio transcription.</li> 
+                 <li><strong>Secure Communication:</strong> Implements HMAC-SHA256 signing for secure inter-service communication between Java and Python components.</li> 
+                 <li><strong>Research Integration:</strong> Includes a benchmarking suite to evaluate LLM-generated subtitles against human speech using the TED-LIUM corpus.</li> 
+               </ul> 
+               <div className="flex items-center justify-between"> 
+                 <p className="text-gray-700 font-semibold"> 
+                   <span className="text-blue-600">Tech Stack:</span> Java Spring Boot, Python FastAPI, Gemini AI, FFmpeg, Docker 
+                 </p> 
+                 <motion.a 
+                   href="#" 
+                   whileHover={{ scale: 1.1 }} 
+                   className="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2" 
+                 > 
+                   View Project → 
+                 </motion.a> 
+               </div> 
+             </motion.div>
           </motion.div>
         </SectionWrapper>
 
