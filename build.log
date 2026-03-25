@@ -1,0 +1,28 @@
+
+> manu-portfolio@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.2
+
+   Linting and checking validity of types ...
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1014ms
+   Collecting page data ...
+   Generating static pages (0/3) ...
+ ✓ Generating static pages (3/3)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (pages)                                Size  First Load JS
+┌ ○ /                                       318 B        95.9 kB
+├   /_app                                     0 B        95.6 kB
+├ ○ /404                                    180 B        95.7 kB
+└ ƒ /api/hello                                0 B        95.6 kB
++ First Load JS shared by all             98.2 kB
+  ├ chunks/framework-acd67e14855de5a2.js  57.7 kB
+  ├ chunks/main-1d48db76d6637926.js       36.8 kB
+  └ other shared chunks (total)           3.71 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
