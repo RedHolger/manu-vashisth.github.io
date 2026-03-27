@@ -105,7 +105,7 @@ export default function Home() {
               <li>Java</li><li>Spring Boot</li><li>MySQL</li>
             </ul>
             <div className="slide-links">
-              <a href="#">View Project &rarr;</a>
+              //<a href="#">View Project &rarr;</a> 
             </div>
           </div>
         </section>
@@ -122,7 +122,7 @@ export default function Home() {
               <li>Java Spring Boot</li><li>Python FastAPI</li><li>Gemini AI</li><li>FFmpeg</li><li>Docker</li>
             </ul>
             <div className="slide-links">
-              <a href="#">View Project &rarr;</a>
+              <a href="https://github.com/RedHolger/AI-Lingua">View Project &rarr;</a>
             </div>
           </div>
           <div className="slide-visual">
@@ -176,7 +176,7 @@ export default function Home() {
                 <span>Email</span>
                 <strong>signorvashistha007@gmail.com</strong>
               </a>
-              <a href="www.linkedin.com/in/manu-vashisth-9366b2219/" target="_blank" rel="noreferrer">
+              <a href="https://www.linkedin.com/in/manu-vashisth-9366b2219/" target="_blank" rel="noreferrer">
                 <span>LinkedIn</span>
                 <strong>Manu</strong>
               </a>
