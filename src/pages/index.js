@@ -141,7 +141,7 @@ export default function Home() {
               I am a motivated Computer Science undergraduate with hands-on experience in Full-Stack development, building and optimizing production-level RESTful APIs using Java and Spring Boot. Innovative and technically proficient software developer with hands-on experience as a software intern. Committed to creating impactful change through technology to drive project success. A complex problem solver with a strong analytical mindset and a goal-oriented approach.
             </p>
             <div className="github-graph">
-              <Image src="https://ghchart.rshah.org/166534/ManuVashisth" alt="GitHub contributions" width={600} height={150} />
+              <Image src="https://ghchart.rshah.org/166534/RedHolger" alt="GitHub contributions" width={600} height={150} />
               <a href="https://github.com/RedHolger" target="_blank" rel="noreferrer" className="github-link">
                 github.com/RedHolger &rarr;
               </a>
@@ -176,9 +176,9 @@ export default function Home() {
                 <span>Email</span>
                 <strong>signorvashistha007@gmail.com</strong>
               </a>
-              <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noreferrer">
+              <a href="www.linkedin.com/in/manu-vashisth-9366b2219/" target="_blank" rel="noreferrer">
                 <span>LinkedIn</span>
-                <strong>Your Name</strong>
+                <strong>Manu</strong>
               </a>
               <a href="https://github.com/RedHolger" target="_blank" rel="noreferrer">
                 <span>GitHub</span>
