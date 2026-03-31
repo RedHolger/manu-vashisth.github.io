@@ -1,200 +1,475 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
+import MatrixRain from '@/components/MatrixRain';
+import ParticleField from '@/components/ParticleField';
+import GlitchText from '@/components/GlitchText';
+import { FaExternalLinkAlt, FaGithub, FaLinkedin, FaEnvelope, FaChevronDown } from 'react-icons/fa';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const TechChip = ({ children }) => (
+  <motion.li
+    whileHover={{ scale: 1.05, y: -2 }}
+    transition={{ duration: 0.2 }}
+  >
+    {children}
+  </motion.li>
+);
+
+const ProjectCard = ({ title, description, tech, link, image, reverse }) => (
+  <motion.div
+    className="slide-project"
+    initial={{ opacity: 0, x: reverse ? 50 : -50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+  >
+    <div className="slide-inner">
+      <p className="slide-eyebrow">Project</p>
+      <h2>{title}</h2>
+      <p className="slide-body">{description}</p>
+      <ul className="chips">
+        {tech.map((t, i) => (
+          <TechChip key={i}>{t}</TechChip>
+        ))}
+      </ul>
+      <div className="slide-links">
+        <motion.a
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <span>View Project</span>
+          <FaExternalLinkAlt />
+        </motion.a>
+      </div>
+    </div>
+    <div className="slide-visual">
+      <motion.div
+        className="visual-frame"
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Image src={image} alt={title} width={100} height={100} unoptimized />
+      </motion.div>
+    </div>
+  </motion.div>
+);
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
-    const dots = document.querySelectorAll('.dot');
     const slides = document.querySelectorAll('.slide');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('slide-visible');
           const id = entry.target.id;
-          const index = id.replace('slide-', '').replace(/[a-z]/g, '');
-          dots.forEach(d => d.classList.remove('active'));
-          const activeDot = document.querySelector(`.dot[data-index="${index}"]`);
-          if (activeDot) activeDot.classList.add('active');
+          const index = parseInt(id.replace('slide-', ''));
+          setActiveSection(index);
+          entry.target.classList.add('visible');
         } else {
-          entry.target.classList.remove('slide-visible');
+          entry.target.classList.remove('visible');
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.15 });
 
     slides.forEach(s => observer.observe(s));
 
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const index = dot.dataset.index;
-        const target = document.getElementById(`slide-${index}`);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
+    return () => slides.forEach(s => observer.unobserve(s));
+  }, []);
 
-    // Cleanup
-    return () => {
-      slides.forEach(s => observer.unobserve(s));
-      dots.forEach(dot => {
-        dot.removeEventListener('click', () => {});
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth).toFixed(2),
+        y: (e.clientY / window.innerHeight).toFixed(2)
       });
     };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  const scrollToSection = (index) => {
+    const target = document.getElementById(`slide-${index}`);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
       <Head>
-        <title>Manu Vashisth</title>
+        <title>Manu Vashisth | Engineer</title>
         <meta name="description" content="Manu Vashisth. Engineer. Full-stack development and machine learning." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <MatrixRain />
+      <ParticleField />
+
+      <div className="grid-overlay" />
+
+      <div className="corner-decoration top-left" />
+      <div className="corner-decoration top-right" />
+      <div className="corner-decoration bottom-left" />
+      <div className="corner-decoration bottom-right" />
+
+      <motion.div
+        className="coordinate-display"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        [{mousePos.x}, {mousePos.y}] // SYSTEM ONLINE
+      </motion.div>
+
       <nav className="nav">
-        <div className="nav-dots">
-          <button className="dot active" data-index="0" aria-label="Intro"></button>
-          <button className="dot" data-index="1" aria-label="Work"></button>
-          <button className="dot" data-index="2" aria-label="About"></button>
-          <button className="dot" data-index="3" aria-label="Connect"></button>
-        </div>
-        <a className="nav-cta" href="mailto:signorvashistha007@gmail.com">Get in touch</a>
+        <motion.div
+          className="nav-dots"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
+          {[0, 1, 2, 3, 4].map((i) => (
+            <motion.button
+              key={i}
+              className={`dot ${activeSection === i ? 'active' : ''}`}
+              onClick={() => scrollToSection(i)}
+              aria-label={`Go to section ${i + 1}`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            />
+          ))}
+        </motion.div>
+        <motion.a
+          className="nav-cta"
+          href="mailto:signorvashistha007@gmail.com"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span>./contact --init</span>
+        </motion.a>
       </nav>
 
       <main className="slides">
 
-        {/* 01 — Intro */}
+        {/* 01 — Hero/Intro */}
         <section className="slide slide-intro" id="slide-0">
-          <div className="slide-inner">
-            <p className="slide-eyebrow">Engineer</p>
-            <h1>Manu<br /><em>Vashisth</em></h1>
-            <p className="slide-sub">I write software. Mostly full-stack development, machine learning, and tooling.</p>
-            <div className="slide-scroll-hint">
-              <span>Scroll</span>
-              <div className="scroll-line"></div>
-            </div>
+          <div className="slide-content slide-intro">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              <motion.p className="slide-eyebrow" variants={fadeInUp}>
+                <span className="status-indicator">
+                  <span className="status-dot" />
+                  Available for opportunities
+                </span>
+              </motion.p>
+
+              <motion.h1 variants={fadeInUp}>
+                <span className="highlight">Manu</span>
+                <GlitchText>Vashisth</GlitchText>
+                <em>// Engineer & Developer</em>
+              </motion.h1>
+
+              <motion.p className="slide-sub" variants={fadeInUp}>
+                Building digital experiences with code. Full-stack development, machine learning, and systems architecture.
+                <span className="cursor" />
+              </motion.p>
+
+              <motion.div className="slide-scroll-hint" variants={fadeInUp}>
+                <span>Scroll to explore</span>
+                <div className="scroll-line" />
+              </motion.div>
+            </motion.div>
           </div>
-          <div className="slide-aside">
+
+          <motion.div
+            className="slide-aside"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
             <div className="aside-block">
               <span>Currently</span>
-              <p>Full Stack Intern - WorldRef</p>
+              <p>Full Stack Intern @ WorldRef</p>
             </div>
             <div className="aside-block">
-              <span>Languages</span>
-              <p>Java, Python</p>
+              <span>Stack</span>
+              <p>Java, Python, Spring Boot, FastAPI</p>
             </div>
             <div className="aside-block">
-              <span>Open to</span>
-              <p>Good problems. Drop me a line.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Projects */}
-        <section className="slide slide-project slide-project-alt" id="slide-1a">
-          <div className="slide-visual slide-visual-left">
-            <div className="visual-frame">
-              <Image src="/globe.svg" alt="WorldRef Application" width={100} height={100} />
-            </div>
-          </div>
-          <div className="slide-inner">
-            <p className="slide-eyebrow">Work / WorldRef</p>
-            <h2>WorldRef Application</h2>
-            <p className="slide-body">
-              Full-Stack Development for WorldRef, a cross-border B2B document marketplace for process and utility plants, including buyer profiles, quotation services, and seller dashboards.
-            </p>
-            <ul className="chips">
-              <li>Java</li><li>Spring Boot</li><li>MySQL</li>
-            </ul>
-            <div className="slide-links">
-              //<a href="#">View Project &rarr;</a> 
-            </div>
-          </div>
-        </section>
-
-        {/* Lingua: Media-Driven Language Learning */}
-        <section className="slide slide-project" id="slide-1b">
-          <div className="slide-inner">
-            <p className="slide-eyebrow">Project</p>
-            <h2>Lingua: Media-Driven Language Learning</h2>
-            <p className="slide-body">
-              An AI-powered language learning platform that transforms media subtitles into personalized study materials. It uses a hybrid microservices architecture to process video content, generating simplified subtitles, vocabulary previews, grammar recaps, and interactive quizzes tailored to the user&apos;s CEFR level.
-            </p>
-            <ul className="chips">
-              <li>Java Spring Boot</li><li>Python FastAPI</li><li>Gemini AI</li><li>FFmpeg</li><li>Docker</li>
-            </ul>
-            <div className="slide-links">
-              <a href="https://github.com/RedHolger/AI-Lingua">View Project &rarr;</a>
-            </div>
-          </div>
-          <div className="slide-visual">
-            <div className="visual-frame">
-              <Image src="/window.svg" alt="Lingua: Media-Driven Language Learning" width={100} height={100} />
-            </div>
-          </div>
-        </section>
-
-        {/* About */}
-        <section className="slide slide-about" id="slide-2">
-          <div className="slide-inner slide-inner-about">
-            <p className="slide-eyebrow">About</p>
-            <h2>Engineer.<br />Open source.</h2>
-            <p className="slide-body">
-              I am a motivated Computer Science undergraduate with hands-on experience in Full-Stack development, building and optimizing production-level RESTful APIs using Java and Spring Boot. Innovative and technically proficient software developer with hands-on experience as a software intern. Committed to creating impactful change through technology to drive project success. A complex problem solver with a strong analytical mindset and a goal-oriented approach.
-            </p>
-            <div className="github-graph">
-              <Image src="https://ghchart.rshah.org/166534/RedHolger" alt="GitHub contributions" width={600} height={150} />
-              <a href="https://github.com/RedHolger" target="_blank" rel="noreferrer" className="github-link">
-                github.com/RedHolger &rarr;
-              </a>
-            </div>
-          </div>
-          <div className="slide-aside slide-aside-about">
-            <div className="aside-block">
-              <span>Role</span>
-              <p>Full Stack Intern at WorldRef. Open source contributor.</p>
-            </div>
-            <div className="aside-block">
-              <span>Interests</span>
-              <p>Full-stack development, Machine Learning, Open source</p>
+              <span>Focus</span>
+              <p>ML Systems, REST APIs, Open Source</p>
             </div>
             <div className="aside-block">
               <span>Location</span>
               <p>Delhi, India</p>
             </div>
+          </motion.div>
+        </section>
+
+        {/* 02 — About (Centered) */}
+        <section className="slide slide-about-center" id="slide-1">
+          <div className="slide-content">
+            <motion.div
+              className="about-center-container"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <motion.p className="slide-eyebrow about-kicker" variants={fadeInUp}>About</motion.p>
+
+              <motion.h2 className="about-heading" variants={fadeInUp}>
+                <span className="highlight">Engineer.</span>
+                <br />
+                Open Source.
+              </motion.h2>
+
+              <motion.p className="about-intro" variants={fadeInUp}>
+                Motivated Computer Science undergraduate with hands-on experience in Full-Stack 
+                development and machine learning. Committed to creating impactful solutions through 
+                technology. A complex problem solver with a strong analytical mindset and a goal-oriented 
+                approach.
+              </motion.p>
+
+              <div className="about-grid">
+                <motion.div
+                  className="about-left"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                  <div className="github-graph">
+                    <Image
+                      src="https://ghchart.rshah.org/166534/RedHolger"
+                      alt="GitHub contributions"
+                      width={600}
+                      height={150}
+                      unoptimized
+                    />
+                    <motion.a
+                      href="https://github.com/RedHolger"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="github-link"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FaGithub />
+                      github.com/RedHolger
+                    </motion.a>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="slide-aside about-aside"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                  <div className="aside-block">
+                    <span>Role</span>
+                    <p>Full Stack Intern at WorldRef</p>
+                  </div>
+                  <div className="aside-block">
+                    <span>Education</span>
+                    <p>B.Tech Computer Science</p>
+                  </div>
+                  <div className="aside-block">
+                    <span>Interests</span>
+                    <p>Full-stack, ML/AI, Open Source</p>
+                  </div>
+                  <div className="aside-block">
+                    <span>Status</span>
+                    <p>Open to opportunities</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Connect */}
-        <section className="slide slide-connect" id="slide-3">
-          <div className="slide-inner slide-inner-connect">
-            <p className="slide-eyebrow">Connect</p>
-            <h2>Get in<br />touch.</h2>
-            <p className="slide-body">
-              I am open to interesting work and the occasional collaboration. Email is the best way to reach me.
-            </p>
-            <div className="connect-links">
-              <a href="mailto:signorvashistha007@gmail.com">
-                <span>Email</span>
-                <strong>signorvashistha007@gmail.com</strong>
-              </a>
-              <a href="https://www.linkedin.com/in/manu-vashisth-9366b2219/" target="_blank" rel="noreferrer">
-                <span>LinkedIn</span>
-                <strong>Manu</strong>
-              </a>
-              <a href="https://github.com/RedHolger" target="_blank" rel="noreferrer">
-                <span>GitHub</span>
-                <strong>RedHolger</strong>
-              </a>
-              {/* Add Twitter/X if you have it */}
-              {/* <a href="https://x.com/yourusername" target="_blank" rel="noreferrer">
-                <span>X</span>
-                <strong>@yourusername</strong>
-              </a> */}
-            </div>
-            <p className="slide-footer">© 2026 Manu Vashisth. All rights reserved.</p>
+        {/* 03 — WorldRef Project */}
+        <section className="slide" id="slide-2">
+          <div className="slide-content">
+            <ProjectCard
+              title="WorldRef Application"
+              description="Full-Stack Development for WorldRef, a cross-border B2B document marketplace for process and utility plants. Built scalable APIs, optimized database queries, and implemented real-time features for buyer-seller interactions."
+              tech={["Java", "Spring Boot", "MySQL", "REST APIs"]}
+              link="#"
+              image="/globe.svg"
+              reverse={false}
+            />
           </div>
+        </section>
+
+        {/* 04 — Lingua Project */}
+        <section className="slide" id="slide-3">
+          <div className="slide-content">
+            <ProjectCard
+              title="Lingua: AI Language Learning"
+              description="An AI-powered platform that transforms video subtitles into personalized study materials. Uses hybrid microservices architecture with Gemini AI for generating vocabulary previews, grammar recaps, and adaptive quizzes."
+              tech={["Java Spring Boot", "Python FastAPI", "Gemini AI", "FFmpeg", "Docker"]}
+              link="https://github.com/RedHolger/AI-Lingua"
+              image="/window.svg"
+              reverse={true}
+            />
+          </div>
+        </section>
+
+        {/* 05 — Contact */}
+        <section className="slide slide-connect" id="slide-4">
+          <motion.div
+            className="slide-content slide-inner-connect"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.p className="slide-eyebrow" variants={fadeInUp}>Connect</motion.p>
+            <h2>
+              <GlitchText>Get in</GlitchText>
+              <br />
+              <span className="highlight">touch.</span>
+            </h2>
+            <p className="slide-body">
+              Open to interesting work and collaborations. Let&apos;s build something remarkable together.
+            </p>
+
+            <motion.div
+              className="connect-links"
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+            >
+              <motion.a
+                href="mailto:signorvashistha007@gmail.com"
+                variants={fadeInUp}
+                whileHover={{ x: 8 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span><FaEnvelope /> Email</span>
+                <strong>signorvashistha007@gmail.com</strong>
+              </motion.a>
+
+              <motion.a
+                href="https://www.linkedin.com/in/manu-vashisth-9366b2219/"
+                target="_blank"
+                rel="noreferrer"
+                variants={fadeInUp}
+                whileHover={{ x: 8 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span><FaLinkedin /> LinkedIn</span>
+                <strong>Manu Vashisth</strong>
+              </motion.a>
+
+              <motion.a
+                href="https://github.com/RedHolger"
+                target="_blank"
+                rel="noreferrer"
+                variants={fadeInUp}
+                whileHover={{ x: 8 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span><FaGithub /> GitHub</span>
+                <strong>RedHolger</strong>
+              </motion.a>
+            </motion.div>
+
+            <motion.p
+              className="slide-footer"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              © 2026 Manu Vashisth // All systems operational
+            </motion.p>
+          </motion.div>
         </section>
 
       </main>
+
+      <motion.div
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          zIndex: 100,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px'
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+      >
+        <motion.button
+          onClick={() => scrollToSection(activeSection > 0 ? activeSection - 1 : 0)}
+          style={{
+            background: 'rgba(10, 10, 15, 0.8)',
+            border: '1px solid rgba(0, 255, 65, 0.2)',
+            borderRadius: '8px',
+            padding: '10px',
+            cursor: 'pointer',
+            color: 'var(--accent)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 255, 65, 0.3)' }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Scroll up"
+        >
+          <FaChevronDown style={{ transform: 'rotate(180deg)' }} />
+        </motion.button>
+        <motion.button
+          onClick={() => scrollToSection(activeSection < 4 ? activeSection + 1 : 4)}
+          style={{
+            background: 'rgba(10, 10, 15, 0.8)',
+            border: '1px solid rgba(0, 255, 65, 0.2)',
+            borderRadius: '8px',
+            padding: '10px',
+            cursor: 'pointer',
+            color: 'var(--accent)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 255, 65, 0.3)' }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Scroll down"
+        >
+          <FaChevronDown />
+        </motion.button>
+      </motion.div>
     </>
   );
 }
