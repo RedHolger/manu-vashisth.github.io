@@ -13,6 +13,7 @@
   --accent-dim: rgba(0, 255, 65, 0.6);
   --accent-glow: rgba(0, 255, 65, 0.3);
   --accent-secondary: #00d4ff;
+  --accent-tertiary: #b06cff;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
   --font-display: "Space Grotesk", sans-serif;
   --glass-bg: rgba(13, 13, 20, 0.7);
@@ -180,6 +181,184 @@ body::before {
   animation: flicker 0.15s infinite;
 }
 
+.wire-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(0, 212, 255, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(18, 12, 40, 0.28), transparent 36%),
+    #050812;
+}
+
+.wire-grid-flat {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0, 255, 65, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.035) 1px, transparent 1px);
+  background-size: 52px 52px;
+  opacity: 0.4;
+}
+
+.wire-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.018) 0px,
+    rgba(255,255,255,0.018) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.wire-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+.wire-totem-rig,
+.wire-totem-settle,
+.wire-totem-axis-spin,
+.wire-totem-precession,
+.wire-totem-pitch {
+  width: 280px;
+  height: 280px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 88%;
+}
+
+.wire-totem-shell {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  transform-style: preserve-3d;
+}
+
+.totem-axis-line {
+  position: absolute;
+  left: 50%;
+  top: 42px;
+  width: 2px;
+  height: 190px;
+  margin-left: -1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 240, 255, 0.95),
+    rgba(196, 130, 255, 0.7),
+    rgba(0, 255, 200, 0.85)
+  );
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.35);
+}
+
+.totem-long-line {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(150, 235, 255, 0.95),
+    rgba(255, 160, 225, 0.62)
+  );
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.26);
+}
+
+.totem-long-line.top {
+  top: 42px;
+  height: 90px;
+  transform-origin: center bottom;
+  clip-path: polygon(49% 0%, 51% 0%, 75% 100%, 25% 100%);
+}
+
+.totem-long-line.bottom {
+  top: 144px;
+  height: 84px;
+  transform-origin: center top;
+  clip-path: polygon(22% 0%, 78% 0%, 52% 100%, 48% 100%);
+}
+
+.totem-contour-ring {
+  position: absolute;
+  left: 50%;
+  border: 1.8px solid rgba(165, 235, 255, 0.92);
+  border-radius: 50%;
+  box-shadow:
+    0 0 8px rgba(0, 212, 255, 0.32),
+    0 0 16px rgba(176, 108, 255, 0.14);
+}
+
+.totem-contour-ring.top {
+  opacity: 0.9;
+}
+
+.totem-contour-ring.mid {
+  opacity: 0.98;
+}
+
+.totem-contour-ring.bottom {
+  opacity: 0.86;
+}
+
+.wire-contact-shadow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 112px;
+  height: 16px;
+  margin-left: -56px;
+  margin-top: 88px;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(120, 240, 255, 0.24) 0%,
+    rgba(180, 110, 255, 0.12) 38%,
+    rgba(0, 0, 0, 0) 74%
+  );
+  filter: blur(4px);
+}
+
+.wire-loader-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  margin-top: 154px;
+  color: rgba(255,255,255,0.78);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.wire-hud {
+  position: absolute;
+  color: rgba(255,255,255,0.48);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.wire-hud-top-left {
+  top: 28px;
+  left: 32px;
+}
+
+.wire-hud-bottom-right {
+  right: 32px;
+  bottom: 28px;
+}
+
 .nav {
   position: fixed;
   top: 0;
@@ -289,26 +468,178 @@ body::before {
   z-index: 1;
 }
 
+.app-shell {
+  position: relative;
+  min-height: 100svh;
+  overflow-x: clip;
+}
+
 .slides {
   width: 100%;
 }
 
 .slide {
-  min-height: 100vh;
+  min-height: 100svh;
+  padding: 110px 48px 110px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 100px 65px 60px;
   position: relative;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .slide.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+.slide-content {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.slide-about-center .slide-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-center-container {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.about-kicker {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.about-heading {
+  margin: 0 0 18px;
+  text-align: center;
+  line-height: 0.92;
+  font-size: clamp(3.6rem, 7vw, 6.8rem);
+}
+
+.about-intro {
+  max-width: 760px;
+  margin: 0 auto 30px;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: clamp(0.98rem, 1.05vw, 1.08rem);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.github-graph {
+  height: 100%;
+  padding: 22px;
+  border: 1px solid rgba(0, 255, 65, 0.14);
+  border-radius: 20px;
+  background: rgba(0, 10, 6, 0.28);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.github-graph img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.github-link {
+  margin-top: 18px;
+  align-self: center;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.about-stat-card {
+  min-height: 132px;
+  padding: 20px 18px;
+  border: 1px solid rgba(0, 255, 65, 0.12);
+  border-radius: 20px;
+  background: rgba(0, 18, 10, 0.28);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-stat-card span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+}
+
+.about-stat-card p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.floating-nav {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floating-nav-btn {
+  background: rgba(10, 10, 15, 0.82);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.coordinate-display {
+  position: fixed;
+  left: 18px;
+  bottom: 16px;
+  z-index: 40;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(8, 8, 14, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  line-height: 1;
+  max-width: calc(100vw - 140px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .slide-content {
@@ -1092,5 +1423,199 @@ body::before {
 
   .slide-project h2 {
     font-size: clamp(1.8rem, 9vw, 2.8rem);
+  }
+}
+
+@media (max-width: 1100px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .slide {
+    padding: 110px 30px 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide {
+    min-height: auto;
+    padding: 96px 20px 48px;
+  }
+
+  .about-heading {
+    font-size: clamp(2.7rem, 13vw, 4.5rem);
+  }
+
+  .about-intro {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stat-card {
+    min-height: unset;
+    padding: 20px 18px;
+  }
+
+  .github-graph {
+    padding: 18px;
+  }
+
+  .coordinate-display {
+    left: 14px;
+    bottom: 12px;
+    font-size: 10px;
+    max-width: calc(100vw - 110px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav {
+    padding: 14px 16px;
+  }
+
+  .nav-cta {
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+
+  .floating-nav {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .floating-nav-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .slide-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .slide-aside {
+    width: 100%;
+  }
+
+  .slide h1,
+  .about-heading,
+  .slide-connect h2 {
+    word-break: break-word;
+  }
+
+  .connect-links a {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .nav-dots {
+    gap: 10px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-height: 860px) and (min-width: 769px) {
+  .slide {
+    padding-top: 92px;
+    padding-bottom: 92px;
+  }
+
+  .about-heading {
+    font-size: clamp(3rem, 5.2vw, 5.4rem);
+  }
+
+  .about-intro {
+    margin-bottom: 22px;
+    line-height: 1.55;
+  }
+
+  .about-stat-card {
+    min-height: 118px;
+    padding: 18px 16px;
+  }
+
+  .github-graph {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide {
+    min-height: auto;
+    padding: 88px 18px 76px;
+    align-items: flex-start;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .about-heading {
+    font-size: clamp(2.6rem, 13vw, 4.3rem);
+  }
+
+  .about-intro {
+    margin-bottom: 20px;
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .about-stat-card {
+    min-height: unset;
+    padding: 18px 16px;
+  }
+
+  .coordinate-display {
+    left: 12px;
+    bottom: 10px;
+    font-size: 10px;
+    max-width: calc(100vw - 96px);
+  }
+
+  .floating-nav {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .floating-nav-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .wire-loader-text {
+    margin-top: 138px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .wire-hud-top-left {
+    top: 18px;
+    left: 18px;
+  }
+
+  .wire-hud-bottom-right {
+    right: 18px;
+    bottom: 18px;
   }
 }
