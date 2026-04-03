@@ -181,25 +181,70 @@ body::before {
   animation: flicker 0.15s infinite;
 }
 
-.wire-loader {
+.totem3d-loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
+  background: #050505;
   overflow: hidden;
+}
+
+.totem3d-loader canvas {
+  display: block;
+}
+
+.totem3d-loader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(circle at center, rgba(0, 212, 255, 0.08), transparent 30%),
-    linear-gradient(180deg, rgba(18, 12, 40, 0.28), transparent 36%),
-    #050812;
+    radial-gradient(circle at center, rgba(255,255,255,0.045), transparent 32%),
+    linear-gradient(to bottom, rgba(255,255,255,0.02), transparent 24%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.totem3d-hud {
+  position: absolute;
+  z-index: 2;
+  color: rgba(255,255,255,0.42);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.totem3d-hud-left {
+  top: 28px;
+  left: 32px;
+}
+
+.totem3d-hud-right {
+  right: 32px;
+  bottom: 28px;
+}
+
+.totem3d-copy {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255,255,255,0.72);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 }
 
 .wire-grid-flat {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(0, 255, 65, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 65, 0.035) 1px, transparent 1px);
-  background-size: 52px 52px;
-  opacity: 0.4;
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.3;
 }
 
 .wire-scanlines {
@@ -222,109 +267,189 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1800px;
-  transform-style: preserve-3d;
+  perspective: 1200px;
 }
 
-.wire-totem-rig,
-.wire-totem-settle,
-.wire-totem-axis-spin,
-.wire-totem-precession,
-.wire-totem-pitch {
+.wire-totem-rig {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  margin-left: -100px;
+  margin-top: -120px;
+}
+
+.wire-totem-settle {
+  width: 200px;
+  height: 200px;
+  transform-origin: 50% 90%;
+}
+
+.wire-totem-orbit-stage1,
+.wire-totem-orbit-stage2,
+.wire-totem-tilt,
+.wire-totem-spin {
   width: 280px;
   height: 280px;
-  transform-style: preserve-3d;
   transform-origin: 50% 88%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.wire-totem-spin {
+  backface-visibility: hidden;
 }
 
 .wire-totem-shell {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: 280px;
   height: 280px;
+  margin-left: -140px;
+  margin-top: -140px;
   transform-style: preserve-3d;
 }
 
 .totem-axis-line {
   position: absolute;
   left: 50%;
-  top: 42px;
+  top: 10%;
   width: 2px;
-  height: 190px;
+  height: 80%;
   margin-left: -1px;
   background: linear-gradient(
     to bottom,
-    rgba(120, 240, 255, 0.95),
-    rgba(196, 130, 255, 0.7),
-    rgba(0, 255, 200, 0.85)
+    rgba(200, 220, 255, 0.9) 0%,
+    rgba(200, 220, 255, 0.5) 50%,
+    rgba(200, 220, 255, 0.9) 100%
   );
-  box-shadow: 0 0 14px rgba(0, 212, 255, 0.35);
+  transform: translateZ(0);
+  filter: drop-shadow(0 0 3px rgba(200, 220, 255, 0.4));
 }
 
 .totem-long-line {
   position: absolute;
   left: 50%;
-  width: 2px;
-  margin-left: -1px;
+  top: 10%;
+  width: 1.5px;
+  height: 80%;
+  margin-left: -0.75px;
   background: linear-gradient(
     to bottom,
-    rgba(150, 235, 255, 0.95),
-    rgba(255, 160, 225, 0.62)
+    rgba(180, 200, 255, 0.35) 0%,
+    rgba(180, 200, 255, 0.15) 50%,
+    rgba(180, 200, 255, 0.35) 100%
   );
-  box-shadow: 0 0 8px rgba(0, 212, 255, 0.26);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 0 2px rgba(180, 200, 255, 0.2));
 }
 
 .totem-long-line.top {
-  top: 42px;
-  height: 90px;
-  transform-origin: center bottom;
-  clip-path: polygon(49% 0%, 51% 0%, 75% 100%, 25% 100%);
+  top: 10%;
+  height: 50%;
 }
 
 .totem-long-line.bottom {
-  top: 144px;
-  height: 84px;
-  transform-origin: center top;
-  clip-path: polygon(22% 0%, 78% 0%, 52% 100%, 48% 100%);
+  top: 50%;
+  height: 50%;
 }
 
 .totem-contour-ring {
   position: absolute;
   left: 50%;
-  border: 1.8px solid rgba(165, 235, 255, 0.92);
+  border: 1.5px solid rgba(200, 220, 255, 0.75);
   border-radius: 50%;
+  transform-style: preserve-3d;
   box-shadow:
-    0 0 8px rgba(0, 212, 255, 0.32),
-    0 0 16px rgba(176, 108, 255, 0.14);
+    0 0 6px rgba(200, 220, 255, 0.25),
+    inset 0 0 4px rgba(200, 220, 255, 0.08);
 }
 
 .totem-contour-ring.top {
-  opacity: 0.9;
+  border-color: rgba(180, 240, 255, 0.8);
+  box-shadow:
+    0 0 8px rgba(180, 240, 255, 0.3),
+    inset 0 0 5px rgba(180, 240, 255, 0.1);
 }
 
 .totem-contour-ring.mid {
-  opacity: 0.98;
+  border-color: rgba(200, 220, 255, 0.7);
+  box-shadow:
+    0 0 5px rgba(200, 220, 255, 0.2),
+    inset 0 0 3px rgba(200, 220, 255, 0.06);
 }
 
 .totem-contour-ring.bottom {
-  opacity: 0.86;
+  border-color: rgba(160, 200, 255, 0.65);
+  box-shadow:
+    0 0 4px rgba(160, 200, 255, 0.18),
+    inset 0 0 3px rgba(160, 200, 255, 0.05);
 }
 
 .wire-contact-shadow {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 112px;
+  width: 118px;
   height: 16px;
-  margin-left: -56px;
+  margin-left: -59px;
   margin-top: 88px;
   border-radius: 999px;
   background: radial-gradient(
     ellipse at center,
-    rgba(120, 240, 255, 0.24) 0%,
-    rgba(180, 110, 255, 0.12) 38%,
+    rgba(120, 240, 255, 0.22) 0%,
+    rgba(180, 110, 255, 0.1) 42%,
     rgba(0, 0, 0, 0) 74%
   );
   filter: blur(4px);
+}
+
+.wire-totem-spin {
+  width: 200px;
+  height: 200px;
+  transform-origin: 50% 90%;
+}
+
+.wire-totem {
+  width: 200px;
+  height: 200px;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
+}
+
+.wire-totem-tip {
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.wire-totem-axis {
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1;
+}
+
+.wire-totem-disc-outer {
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.wire-totem-disc-inner {
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 1;
+  fill: none;
+}
+
+.wire-totem-body {
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 1.5;
+}
+
+.wire-totem-cone {
+  stroke: rgba(255, 255, 255, 0.88);
+  stroke-width: 1.5;
+  fill: none;
 }
 
 .wire-loader-text {
@@ -1603,19 +1728,19 @@ body::before {
     height: 42px;
   }
 
-  .wire-loader-text {
-    margin-top: 138px;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-  }
-
-  .wire-hud-top-left {
+  .totem3d-hud-left {
     top: 18px;
     left: 18px;
   }
 
-  .wire-hud-bottom-right {
+  .totem3d-hud-right {
     right: 18px;
     bottom: 18px;
+  }
+
+  .totem3d-copy {
+    bottom: 16%;
+    font-size: 10px;
+    letter-spacing: 0.18em;
   }
 }

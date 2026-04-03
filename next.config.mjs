@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  devIndicators: false,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -11,7 +12,7 @@ const nextConfig = {
     unoptimized: true,
     domains: ['ghchart.rshah.org'],
   },
-  transpilePackages: ['motion'],   // ← This was the missing piece
+  transpilePackages: ['motion', 'three'],
 };
 
 export default nextConfig;

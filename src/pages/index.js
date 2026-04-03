@@ -74,12 +74,11 @@ const ProjectCard = ({ title, description, tech, link, image, reverse }) => (
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 4200);
+    }, 4300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -113,17 +112,6 @@ export default function Home() {
     return () => observer.disconnect();
   }, [isLoading]);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth).toFixed(2),
-        y: (e.clientY / window.innerHeight).toFixed(2)
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   const scrollToSection = (index) => {
     const target = document.getElementById(`slide-${index}`);
     if (target) target.scrollIntoView({ behavior: 'smooth' });
@@ -155,14 +143,6 @@ export default function Home() {
             <div className="corner-decoration top-right" />
             <div className="corner-decoration bottom-left" />
             <div className="corner-decoration bottom-right" />
-
-            <motion.div
-              className="coordinate-display"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              [{mousePos.x}, {mousePos.y}] // SYSTEM ONLINE
-            </motion.div>
 
             <nav className="nav">
               <motion.div
