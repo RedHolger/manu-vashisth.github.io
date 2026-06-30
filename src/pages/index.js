@@ -120,8 +120,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Manu Vashisth | Engineer</title>
-        <meta name="description" content="Manu Vashisth. Engineer. Full-stack development and machine learning." />
+        <title>Manu Vashisth | Software Engineer</title>
+        <meta name="description" content="Manu Vashisth. Software Engineer. Full-stack development, AI/ML, and systems architecture." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -151,7 +151,7 @@ export default function Home() {
                 initial="initial"
                 animate="animate"
               >
-                {[0, 1, 2, 3, 4].map((i) => (
+                {[0, 1, 2, 3, 4, 5, 6].map((i) => (
                   <motion.button
                     key={i}
                     className={`dot ${activeSection === i ? 'active' : ''}`}
@@ -164,7 +164,7 @@ export default function Home() {
               </motion.div>
               <motion.a
                 className="nav-cta"
-                href="mailto:signorvashistha007@gmail.com"
+                href="mailto:manuvashisth963@gmail.com"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
@@ -194,7 +194,7 @@ export default function Home() {
                     <motion.h1 variants={fadeInUp}>
                       <span className="highlight">Manu</span>
                       <GlitchText>Vashisth</GlitchText>
-                      <em>// Engineer & Developer</em>
+                      <em>// Software Engineer</em>
                     </motion.h1>
 
                     <motion.p className="slide-sub" variants={fadeInUp}>
@@ -217,19 +217,23 @@ export default function Home() {
                 >
                   <div className="aside-block">
                     <span>Currently</span>
-                    <p>Full Stack Intern @ WorldRef</p>
+                    <p>Software Engineer</p>
                   </div>
                   <div className="aside-block">
                     <span>Stack</span>
-                    <p>Java, Python, Spring Boot, FastAPI</p>
+                    <p>Java, Python, Spring Boot, FastAPI, PyTorch</p>
                   </div>
                   <div className="aside-block">
                     <span>Focus</span>
-                    <p>ML Systems, REST APIs, Open Source</p>
+                    <p>AI/ML, Full-Stack, Open Source</p>
                   </div>
                   <div className="aside-block">
                     <span>Location</span>
-                    <p>Delhi, India</p>
+                    <p>Limerick, Ireland</p>
+                  </div>
+                  <div className="aside-block">
+                    <span>AI/ML</span>
+                    <p>PyTorch, LangChain, Scikit-learn, NLP, Deep Learning</p>
                   </div>
                 </motion.div>
               </section>
@@ -247,13 +251,11 @@ export default function Home() {
 
                     <motion.h2 className="about-heading" variants={fadeInUp}>
                       <span className="highlight">Engineer.</span>
-                      <br />
-                      Open Source.
                     </motion.h2>
 
                     <motion.p className="about-intro" variants={fadeInUp}>
-                      Motivated Computer Science undergraduate with hands-on experience in Full-Stack 
-                      development and machine learning. Committed to creating impactful solutions through 
+                      Software Engineer with hands-on experience in Full-Stack development and AI/ML.
+                      Committed to creating impactful solutions through 
                       technology. A complex problem solver with a strong analytical mindset and a goal-oriented 
                       approach.
                     </motion.p>
@@ -297,15 +299,15 @@ export default function Home() {
                       >
                         <div className="about-stat-card">
                           <span>Role</span>
-                          <p>Full Stack Intern at WorldRef</p>
+                          <p>Software Engineer</p>
                         </div>
                         <div className="about-stat-card">
                           <span>Education</span>
-                          <p>B.Tech Computer Science</p>
+                          <p>University Of Limerick</p>
                         </div>
                         <div className="about-stat-card">
                           <span>Interests</span>
-                          <p>Full-stack, ML/AI, Open Source</p>
+                          <p>Full-Stack, AI/ML, Open Source</p>
                         </div>
                         <div className="about-stat-card">
                           <span>Status</span>
@@ -343,7 +345,33 @@ export default function Home() {
                 </div>
               </section>
 
-              <section className="slide slide-connect" id="slide-4">
+              <section className="slide" id="slide-4">
+                <div className="slide-content">
+                  <ProjectCard
+                    title="Kensaku"
+                    description="Hybrid search and recommendation engine for industrial catalogs using dense-sparse retrieval, reranking and explainable matching."
+                    tech={["Python", "PyTorch", "LangChain", "Vector Search", "Reranking"]}
+                    link="https://redholger.github.io/Kensaku-/"
+                    image="/file.svg"
+                    reverse={false}
+                  />
+                </div>
+              </section>
+
+              <section className="slide" id="slide-5">
+                <div className="slide-content">
+                  <ProjectCard
+                    title="AI Research @ IIT Guwahati"
+                    description="Developed deep learning models for video dehazing and predictive healthcare systems. Built a breast cancer classifier using PCA + Logistic Regression, achieving 98% test accuracy."
+                    tech={["Python", "PyTorch", "Scikit-learn", "PCA", "Deep Learning"]}
+                    link="#"
+                    image="/vercel.svg"
+                    reverse={true}
+                  />
+                </div>
+              </section>
+
+              <section className="slide slide-connect" id="slide-6">
                 <motion.div
                   className="slide-content slide-inner-connect"
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -369,13 +397,13 @@ export default function Home() {
                     viewport={{ once: true }}
                   >
                     <motion.a
-                      href="mailto:signorvashistha007@gmail.com"
+                      href="mailto:manuvashisth963@gmail.com"
                       variants={fadeInUp}
                       whileHover={{ x: 8 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <span><FaEnvelope /> Email</span>
-                      <strong>signorvashistha007@gmail.com</strong>
+                      <strong>manuvashisth963@gmail.com</strong>
                     </motion.a>
 
                     <motion.a
@@ -433,7 +461,7 @@ export default function Home() {
                 <FaChevronDown style={{ transform: 'rotate(180deg)' }} />
               </motion.button>
               <motion.button
-                onClick={() => scrollToSection(activeSection < 4 ? activeSection + 1 : 4)}
+                onClick={() => scrollToSection(activeSection < 6 ? activeSection + 1 : 6)}
                 className="floating-nav-btn"
                 whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 255, 65, 0.3)' }}
                 whileTap={{ scale: 0.9 }}
