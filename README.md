@@ -15,11 +15,11 @@ Production check: `npm run build`, then `npm start`.
 
 Edit `src/data/portfolio.js` to update featured projects and profile destinations. The SLO app links to the supplied reliability lab demo and explains its recorded-data status. LeetCode links to ManuVashisth’s profile; personal practice is separately linked through public NeetCode submissions. Replace `public/Manu_Vashisth_CV.pdf` to update the résumé.
 
-Project summaries are based on public RedHolger repository READMEs and local source READMEs in `~/Developer/Manu-Vashisth-Personal` and `/Volumes/MANU_DISK/google/sre-portfolio-corrected/source`. Featured additions include SLO Reliability Lab, EvidenceRAG, FlowLedger, and SiliconCheck. Experience and education retain the previous portfolio’s content. Core Knowledge lists technical areas, not verified course transcripts.
+Project summaries are based on public RedHolger repository READMEs and local source READMEs in `~/Developer/Manu-Vashisth-Personal` and `/Volumes/MANU_DISK/google/sre-portfolio-corrected/source`. Featured projects start with CVStar and ReadingQueue, both available from the application launcher. Other additions include SLO Reliability Lab, EvidenceRAG, FlowLedger, and SiliconCheck. Experience and education retain the previous portfolio’s content. Core Knowledge lists technical areas, not verified course transcripts.
 
 ## Interaction
 
-- Dock and desktop shortcuts open portfolio apps; external profiles open new tabs.
+- Dock and desktop shortcuts open portfolio apps; external profiles and app links navigate directly in the current tab; browser Back returns to the desktop.
 - Applications includes search, keyboard focus containment, and Escape to dismiss.
 - Windows support minimize, close, maximize, and reopening from the dock.
 - Project categories filter the selected work.

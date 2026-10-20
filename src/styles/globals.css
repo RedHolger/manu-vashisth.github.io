@@ -1548,3 +1548,7 @@ button:hover {
 .practice-link {
   margin-top: 18px;
 }
+
+.filter-row {
+  flex-wrap: wrap;
+}

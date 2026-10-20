@@ -101,6 +101,22 @@ const apps = [
     detail: "LeetCode & algorithm practice",
   },
   {
+    id: "cvstar",
+    name: "CVStar",
+    icon: FiFileText,
+    color: "green",
+    detail: "LaTeX résumé workspace",
+    href: "https://cvstar-workspace.vercel.app",
+  },
+  {
+    id: "readingqueue",
+    name: "ReadingQueue",
+    icon: FiBookOpen,
+    color: "violet",
+    detail: "Shared reading workspace",
+    href: "https://readingqueue-workspace.vercel.app",
+  },
+  {
     id: "contact",
     name: "Contact",
     icon: FiMail,
@@ -136,6 +152,12 @@ export default function Home() {
     setPhase("desktop");
   }
   useEffect(() => {
+    // Returning from an app should restore the desktop, not replay the intro.
+    if (
+      performance.getEntriesByType("navigation")[0]?.type === "back_forward"
+    ) {
+      setPhase("desktop");
+    }
     const tick = () =>
       setTime(
         new Date().toLocaleString("en-GB", {
@@ -195,9 +217,11 @@ export default function Home() {
       category === "All work" ||
       (category === "AI & ML"
         ? /AI|Machine|Language|Search/.test(p.category)
-        : category === "Hardware"
-          ? p.category.includes("Hardware")
-          : /Systems|Distributed systems/.test(p.category)),
+        : category === "Web apps"
+          ? p.category.startsWith("Web apps")
+          : category === "Hardware"
+            ? p.category.includes("Hardware")
+            : /Systems|Distributed systems/.test(p.category)),
   );
   return (
     <>
@@ -471,11 +495,13 @@ export default function Home() {
                                   key={p.title}
                                   onClick={() => {
                                     setCategory(
-                                      /AI|Machine|Language|Search/.test(
-                                        p.category,
-                                      )
-                                        ? "AI & ML"
-                                        : "Systems",
+                                      p.category.startsWith("Web apps")
+                                        ? "Web apps"
+                                        : /AI|Machine|Language|Search/.test(
+                                              p.category,
+                                            )
+                                          ? "AI & ML"
+                                          : "Systems",
                                     );
                                     open("projects");
                                   }}
@@ -515,18 +541,22 @@ export default function Home() {
                             space in between.
                           </p>
                           <div className="filter-row">
-                            {["All work", "AI & ML", "Systems", "Hardware"].map(
-                              (c) => (
-                                <button
-                                  aria-pressed={category === c}
-                                  className={category === c ? "active" : ""}
-                                  onClick={() => setCategory(c)}
-                                  key={c}
-                                >
-                                  {c}
-                                </button>
-                              ),
-                            )}
+                            {[
+                              "All work",
+                              "Web apps",
+                              "AI & ML",
+                              "Systems",
+                              "Hardware",
+                            ].map((c) => (
+                              <button
+                                aria-pressed={category === c}
+                                className={category === c ? "active" : ""}
+                                onClick={() => setCategory(c)}
+                                key={c}
+                              >
+                                {c}
+                              </button>
+                            ))}
                           </div>
                           <div className="project-grid">
                             {filtered.map((p) => {
@@ -549,7 +579,7 @@ export default function Home() {
                                       href={
                                         p.url || `${profile.github}/${p.repo}`
                                       }
-                                      target="_blank"
+                                      target="_self"
                                       rel="noreferrer"
                                     >
                                       Explore project <FiArrowUpRight />
@@ -576,7 +606,7 @@ export default function Home() {
                           <a
                             className="primary inline"
                             href={profile.resume}
-                            target="_blank"
+                            target="_self"
                             rel="noreferrer"
                           >
                             Open résumé PDF <FiArrowUpRight />
@@ -698,7 +728,7 @@ export default function Home() {
                               <a
                                 className="primary inline"
                                 href={profile.slo}
-                                target="_blank"
+                                target="_self"
                                 rel="noreferrer"
                               >
                                 Open dashboard <FiArrowUpRight />
@@ -743,7 +773,7 @@ export default function Home() {
                                 profile.leetcode ||
                                 `${profile.github}/neetcode-submissions`
                               }
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                             >
                               Open LeetCode <FiArrowUpRight />
@@ -751,7 +781,7 @@ export default function Home() {
                             <a
                               className="text-button practice-link"
                               href={`${profile.github}/neetcode-submissions`}
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                             >
                               My NeetCode submissions <FiArrowUpRight />
@@ -790,7 +820,7 @@ export default function Home() {
                               <a
                                 href={url}
                                 key={name}
-                                target="_blank"
+                                target="_self"
                                 rel="noreferrer"
                               >
                                 <Icon />
@@ -879,7 +909,7 @@ export default function Home() {
                             <a
                               key={app.id}
                               href={app.href}
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                             >
                               <AppIcon app={app} />
@@ -943,9 +973,9 @@ export default function Home() {
                     key={app.id}
                     className="dock-item"
                     href={app.href}
-                    target="_blank"
+                    target="_self"
                     rel="noreferrer"
-                    aria-label={`${app.name} (opens new tab)`}
+                    aria-label={app.name}
                   >
                     <AppIcon app={app} />
                     <span className="dock-tooltip">{app.name} ↗</span>

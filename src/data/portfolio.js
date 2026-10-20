@@ -9,6 +9,26 @@ export const profile = {
 };
 export const projects = [
   {
+    title: "CVStar",
+    category: "Web apps · Resume workspace",
+    icon: "spark",
+    color: "green",
+    description:
+      "A LaTeX résumé workspace with persistent documents, source/PDF editing, job-specific wording, and isolated PDF compilation. Keyword coverage is an explainable heuristic. Public demo; compilation and accounts depend on the hosted backend being online.",
+    tags: ["React", "CodeMirror", "PostgreSQL", "LaTeX"],
+    url: "https://cvstar-workspace.vercel.app",
+  },
+  {
+    title: "ReadingQueue",
+    category: "Web apps · Shared reading",
+    icon: "globe",
+    color: "violet",
+    description:
+      "A private reading workspace for small teams: shared libraries, collections, annotations, and owner/editor/viewer permissions. Built with conflict detection and a JDBC contract tested across PostgreSQL and SQL Server. Public demo; account features require the hosted backend.",
+    tags: ["React", "TypeScript", "Java", "PostgreSQL"],
+    url: "https://readingqueue-workspace.vercel.app",
+  },
+  {
     title: "SLO Reliability Lab",
     category: "Systems · Reliability",
     icon: "wave",
