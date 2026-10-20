@@ -1,43 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Manu’s personal desktop
 
-## Getting Started
+An Ubuntu-inspired portfolio built with Next.js, React, and Motion. Every page visit begins with a reference-shaped 3D metal spinning top, followed by the retro update screen and modern desktop. The intro can be skipped or replayed. The Three.js scene uses local environment lights, a reflective tabletop, and an analytic precession/nutation approximation around a fixed contact point. It is not a rigid-body physics simulation. The supplied GIF is a local fallback for unavailable WebGL; reduced-motion visitors use a still image and a shortened transition.
 
-First, run the development server:
+## Run locally
 
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production check: `npm run build`, then `npm start`.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Content
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Edit `src/data/portfolio.js` to update featured projects and profile destinations. The SLO app links to the supplied reliability lab demo and explains its recorded-data status. LeetCode links to ManuVashisth’s profile; personal practice is separately linked through public NeetCode submissions. Replace `public/Manu_Vashisth_CV.pdf` to update the résumé.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Project summaries are based on public RedHolger repository READMEs and local source READMEs in `~/Developer/Manu-Vashisth-Personal` and `/Volumes/MANU_DISK/google/sre-portfolio-corrected/source`. Featured additions include SLO Reliability Lab, EvidenceRAG, FlowLedger, and SiliconCheck. Experience and education retain the previous portfolio’s content. Core Knowledge lists technical areas, not verified course transcripts.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Interaction
 
-## Learn More
+- Dock and desktop shortcuts open portfolio apps; external profiles open new tabs.
+- Applications includes search, keyboard focus containment, and Escape to dismiss.
+- Windows support minimize, close, maximize, and reopening from the dock.
+- Project categories filter the selected work.
+- Change atmosphere switches between aubergine and teal wallpapers.
+- Mobile layouts use the dock and launcher for navigation and scrollable app content.
+- Reduced-motion preferences disable decorative animations and shorten the boot transition.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
-
-# manu-vashisth.github.io
-
+Pushes to `main` publish through the GitHub Pages workflow. It builds with `GITHUB_PAGES=true`, enabling static export and the `/manu-vashisth.github.io` base path, including résumé and intro assets. To check the deployment build locally, run `GITHUB_PAGES=true npm run build` and serve `out/` under that path.
